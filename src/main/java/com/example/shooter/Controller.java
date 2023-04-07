@@ -1,18 +1,23 @@
 package com.example.shooter;
 
+import com.example.shooter.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 public class Controller {
 
     public Client client;
+
+    @FXML
+    public Circle bigTarget;
+    @FXML
+    public Circle smallTarget;
     @FXML
     private AnchorPane connectPanel;
     @FXML
@@ -56,16 +61,14 @@ public class Controller {
     @FXML
     void onButtonConnectToServerPressed(ActionEvent event) throws IOException {
         String playerName = nameField.getText();
-        if (client.connectToServer(playerName)) {
-            connectPanel.setVisible(false);
-        }
-
+        client.connectToServer(playerName);
+        connectPanel.setVisible(false);
     }
 
 
     @FXML
     void onButtonReadyPressed(ActionEvent event) throws IOException {
-        client.playerReady();
+        client.clientState.isReady = true;
     }
 
     @FXML

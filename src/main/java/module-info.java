@@ -5,7 +5,7 @@ module com.example.shooter {
 
 
     opens com.example.shooter to javafx.fxml;
-    exports com.example.shooter;
     exports com.example.shooter.server;
     opens com.example.shooter.server to javafx.fxml;
+    exports com.example.shooter;
 }

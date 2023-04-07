@@ -1,6 +1,6 @@
-package com.example.shooter.server;
+package com.example.shooter;
 
-public class ClientMessage {
+public class ClientState {
 
     public String playerName;
     public boolean isReady = false;
