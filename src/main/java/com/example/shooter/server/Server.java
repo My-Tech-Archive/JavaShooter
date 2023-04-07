@@ -1,6 +1,7 @@
 package com.example.shooter.server;
 
 import com.example.shooter.ClientState;
+import com.example.shooter.Tools;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -17,19 +18,23 @@ public class Server {
     ServerDialog serverDialog;
 
     double targetSpeed = 1;
-    double arrowSpeed = 2;
-    double arrowRightLimitX = 700;
+    double arrowSpeed = 7;
+    double arrowRightLimitX = 850;
     double arrowStartPosX = 40;
 
     int highTargetLimitY = 50;
-    int lowTargetLimitY = 650;
+    int lowTargetLimitY = 620;
 
     boolean bigTargetMoveUp = false;
-    double bigTargetRadius = 50;
+    double bigTargetRadius = 55;
+    double bigTargetPosX = 715;
     boolean smallTargetMoveUp = false;
-    double smallTargetRadius = 25;
+    double smallTargetRadius = 30;
+    double smallTargetPosX = 838;
+    int winScore = 5;
 
     ArrayList<Boolean> arrowsLaunched = new ArrayList<>();
+    public double[] arrowsPositionY = new double[]{ 278, 375, 476, 174 };
 
 
 
@@ -41,7 +46,7 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(port);
         System.out.println("Server started");
 
-
+        // Отдельный поток для подключений
         new Thread(()->{
             while (true) {
                 try {
@@ -59,6 +64,8 @@ public class Server {
 
         }).start();
 
+        resetGame();
+
         while (true) {
             updateServerState();
             if (serverState.gameIsStarted) handleGame();
@@ -75,9 +82,40 @@ public class Server {
         moveBigTarget();
         moveSmallTarget();
         moveArrows();
+        handleCollisions();
     }
 
 
+    private void handleCollisions() {
+        for (int i = 0; i < serverState.arrowsPositionX.size(); i++) {
+            double arrowPosX = serverState.arrowsPositionX.get(i);
+            boolean collidedToBig = Tools.isCollided(arrowPosX + 70, arrowsPositionY[i],
+                    bigTargetPosX, serverState.bigTargetY, bigTargetRadius);
+            boolean collidedToSmall = Tools.isCollided(arrowPosX + 70, arrowsPositionY[i],
+                    smallTargetPosX, serverState.smallTargetY, smallTargetRadius);
+
+            if (collidedToBig) {
+                int newScore = serverState.playerScores.get(i) + 1;
+                serverState.playerScores.set(i, newScore);
+
+                if (newScore >= winScore) serverState.winner = serverState.playerNames.get(i);
+
+                serverState.arrowsPositionX.set(i, arrowStartPosX);
+                arrowsLaunched.set(i, false);
+                System.out.println("Big");
+            }
+            else if (collidedToSmall) {
+                int newScore = serverState.playerScores.get(i) + 2;
+                serverState.playerScores.set(i, newScore);
+
+                if (newScore >= winScore) serverState.winner = serverState.playerNames.get(i);
+
+                serverState.arrowsPositionX.set(i, arrowStartPosX);
+                arrowsLaunched.set(i, false);
+                System.out.println("Small");
+            }
+        }
+    }
     private void moveBigTarget() {
         if (bigTargetMoveUp) {
             serverState.bigTargetY -= targetSpeed;
@@ -115,6 +153,16 @@ public class Server {
         }
     }
 
+    private void resetGame() {
+        serverState.smallTargetY = (highTargetLimitY + lowTargetLimitY)/2;
+        serverState.bigTargetY = (highTargetLimitY + lowTargetLimitY)/2;
+        serverState.winner = "";
+        for (int i = 0; i < serverState.playerScores.size(); i++) {
+            serverState.playerScores.set(i, 0);
+            serverState.playerShots.set(i, 0);
+        }
+    }
+
 
     private void updateServerState() {
         boolean allPlayersReady = true;
@@ -125,27 +173,36 @@ public class Server {
             if (clientState == null) continue;
 
             if (serverState.playerNames.size() == i) {
-                serverState.playerNames.add(clientState.playerName);
+
+                if (serverState.playerNames.contains(clientState.playerName))
+                    serverState.playerNames.add(clientState.playerName + "1");
+                else serverState.playerNames.add(clientState.playerName);
+
                 serverState.playersReady.add(clientState.isReady);
                 serverState.playerScores.add(0);
+                serverState.playerShots.add(0);
                 serverState.arrowsPositionX.add(arrowStartPosX);
                 arrowsLaunched.add(false);
             }
 
             else  {
-                serverState.playerNames.set(i, clientState.playerName);
+
                 serverState.playersReady.set(i, clientState.isReady);
-                if (clientState.shot) arrowsLaunched.set(i, true);
+                if (clientState.shot) {
+                    if (!arrowsLaunched.get(i)){
+                        int newShots = serverState.playerShots.get(i) + 1;
+                        serverState.playerShots.set(i, newShots);
+                    }
+                    arrowsLaunched.set(i, true);
+                }
             }
 
             if (!clientState.isReady) allPlayersReady = false;
         }
 
+        if (!allPlayersReady && serverState.winner.length() > 0) resetGame();
 
         serverState.gameIsStarted = allPlayersReady;
-        if (clientStates.size() > 0)
-            System.out.println(clientStates.get(0).isReady);
-
     }
 
 

@@ -69,6 +69,9 @@ public class Client extends Application {
             if (dialog.serverState.gameIsStarted) {
                 updateTargets(dialog.serverState);
                 updateArrows(dialog.serverState);
+                updateScores(dialog.serverState);
+                updateShotCounters(dialog.serverState);
+                updateWinWindow(dialog.serverState);
             }
 
         });
@@ -82,12 +85,14 @@ public class Client extends Application {
     private void updateTargets(ServerState gameState) {
         controller.bigTarget.setLayoutY(gameState.bigTargetY);
         controller.smallTarget.setLayoutY(gameState.smallTargetY);
-        System.out.println(controller.bigTarget.getCenterX());
     }
 
 
     private void updatePlayerNames(ServerState gameState) {
         for (int i = 0; i < gameState.playerNames.size(); i++) {
+
+
+
             if (i == 0) {
                 controller.playerPanel1.setVisible(true);
                 controller.playerName1.setText(gameState.playerNames.get(i));
@@ -109,21 +114,45 @@ public class Client extends Application {
 
     private void updateReady(ServerState serverMessage) {
         for (int i = 0; i < serverMessage.playersReady.size(); i++) {
-            if (i == 0 && serverMessage.playersReady.get(i)) {
-                controller.score1.setVisible(true);
-                controller.score1.setText("Ready");
+            if (i == 0) {
+                if (serverMessage.playersReady.get(i)) {
+                    controller.score1.setVisible(true);
+                    controller.score1.setText("Ready");
+                }
+                else {
+                    controller.score1.setVisible(false);
+                    controller.shotCounter1.setVisible(false);
+                }
             }
-            else if (i == 1 && serverMessage.playersReady.get(i)) {
-                controller.score2.setVisible(true);
-                controller.score2.setText("Ready");
+            else if (i == 1) {
+                if (serverMessage.playersReady.get(i)) {
+                    controller.score2.setVisible(true);
+                    controller.score2.setText("Ready");
+                }
+                else {
+                    controller.score2.setVisible(false);
+                    controller.shotCounter2.setVisible(false);
+                }
             }
-            else if (i == 2 && serverMessage.playersReady.get(i)) {
-                controller.score3.setVisible(true);
-                controller.score3.setText("Ready");
+            else if (i == 2) {
+                if (serverMessage.playersReady.get(i)) {
+                    controller.score3.setVisible(true);
+                    controller.score3.setText("Ready");
+                }
+                else {
+                    controller.score3.setVisible(false);
+                    controller.shotCounter3.setVisible(false);
+                }
             }
-            else if (i == 3 && serverMessage.playersReady.get(i)) {
-                controller.score4.setVisible(true);
-                controller.score4.setText("Ready");
+            else if (i == 3) {
+                if (serverMessage.playersReady.get(i)) {
+                    controller.score4.setVisible(true);
+                    controller.score4.setText("Ready");
+                }
+                else {
+                    controller.score4.setVisible(false);
+                    controller.shotCounter4.setVisible(false);
+                }
             }
         }
     }
@@ -137,6 +166,43 @@ public class Client extends Application {
         }
     }
 
+    private void updateScores(ServerState serverMessage) {
+        for (int i = 0; i < serverMessage.playerScores.size(); i++) {
+            if (i == 0) controller.score1.setText("Score: " + serverMessage.playerScores.get(i).toString());
+            if (i == 1) controller.score2.setText("Score: " + serverMessage.playerScores.get(i).toString());
+            if (i == 2) controller.score3.setText("Score: " + serverMessage.playerScores.get(i).toString());
+            if (i == 3) controller.score4.setText("Score: " + serverMessage.playerScores.get(i).toString());
+        }
+    }
+
+    private void updateShotCounters(ServerState serverMessage) {
+        for (int i = 0; i < serverMessage.playerShots.size(); i++) {
+            if (i == 0) {
+                controller.shotCounter1.setVisible(true);
+                controller.shotCounter1.setText("Shots: " + serverMessage.playerShots.get(i).toString());
+            }
+            if (i == 1)  {
+                controller.shotCounter2.setVisible(true);
+                controller.shotCounter2.setText("Shots: " + serverMessage.playerShots.get(i).toString());
+            }
+            if (i == 2) {
+                controller.shotCounter3.setVisible(true);
+                controller.shotCounter3.setText("Shots: " + serverMessage.playerShots.get(i).toString());
+            }
+            if (i == 3) {
+                controller.shotCounter4.setVisible(true);
+                controller.shotCounter4.setText("Shots: " + serverMessage.playerShots.get(i).toString());
+            }
+        }
+    }
+
+    private void updateWinWindow(ServerState serverMessage) {
+        if (serverMessage.winner.length() > 0) {
+            controller.winnerPanel.setVisible(true);
+            controller.winnerText.setText("Winner: " + serverMessage.winner);
+            clientState.isReady = false;
+        }
+    }
 
 
 }

@@ -63,7 +63,10 @@ public class Controller {
     public Rectangle arrow3;
     @FXML
     public Rectangle arrow4;
-
+    @FXML
+    public AnchorPane winnerPanel;
+    @FXML
+    public Label winnerText;
 
 
 
@@ -77,22 +80,25 @@ public class Controller {
 
     @FXML
     void onButtonReadyPressed(ActionEvent event) throws IOException {
-        System.out.println("Ready Pressed");
         client.clientState.isReady = true;
     }
 
     @FXML
     void onButtonShootPressed(ActionEvent event) {
-        System.out.println("Ready Pressed");
         client.clientState.shot = true;
 
     }
 
     @FXML
     void onButtonStopPressed(ActionEvent event) {
+        client.clientState.isReady = false;
 
     }
 
+    @FXML
+    void onButtonPlayAgainPressed(ActionEvent event) {
+        winnerPanel.setVisible(false);
+    }
 
 
 

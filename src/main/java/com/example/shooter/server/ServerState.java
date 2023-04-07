@@ -7,7 +7,11 @@ public class ServerState {
     public List<String> playerNames = new ArrayList<>();
     public List<Boolean> playersReady = new ArrayList<>();
     public List<Integer> playerScores = new ArrayList<>();
+    public List<Integer> playerShots = new ArrayList<>();
     public List<Double> arrowsPositionX = new ArrayList<>();
+
+    public String winner = "";
+
 
 
     public boolean gameIsStarted = false;

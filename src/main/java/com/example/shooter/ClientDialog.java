@@ -30,12 +30,13 @@ public class ClientDialog extends Thread {
             while (true) {
                 if (dataFromServer.available() > 0) {
                     serverState = gson.fromJson(dataFromServer.readUTF(), ServerState.class);
-                    System.out.println(dataFromServer.readUTF().getBytes().length);
                 }
 
                 dataToServer.flush();
                 dataToServer.writeUTF(gson.toJson(clientState, ClientState.class));
+
                 clientState.shot = false;
+
                 try { Thread.sleep(Server.sleepTime); }
                 catch (Exception e) { }
             }

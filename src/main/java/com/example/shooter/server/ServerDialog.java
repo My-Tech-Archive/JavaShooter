@@ -29,7 +29,6 @@ public class ServerDialog extends Thread {
                         var clientState = gson.fromJson(connections.get(i).dataFromClient.readUTF(), ClientState.class);
                         if (server.clientStates.size() == i) server.clientStates.add(clientState);
                         else server.clientStates.set(i, clientState);
-                        System.out.println("Accepted from " + i);
                     }
                 }
 
