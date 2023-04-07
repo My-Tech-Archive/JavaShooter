@@ -68,6 +68,7 @@ public class Client extends Application {
 
             if (dialog.serverState.gameIsStarted) {
                 updateTargets(dialog.serverState);
+                updateArrows(dialog.serverState);
             }
 
         });
@@ -79,9 +80,9 @@ public class Client extends Application {
 
 
     private void updateTargets(ServerState gameState) {
-        controller.bigTarget.setCenterY(gameState.bigTargetY);
-        controller.smallTarget.setCenterY(gameState.smallTargetY);
-        System.out.println(gameState.bigTargetY);
+        controller.bigTarget.setLayoutY(gameState.bigTargetY);
+        controller.smallTarget.setLayoutY(gameState.smallTargetY);
+        System.out.println(controller.bigTarget.getCenterX());
     }
 
 
@@ -126,6 +127,16 @@ public class Client extends Application {
             }
         }
     }
+
+    private void updateArrows(ServerState serverMessage) {
+        for (int i = 0; i < serverMessage.arrowsPositionX.size(); i++) {
+            if (i == 0) controller.arrow1.setLayoutX(serverMessage.arrowsPositionX.get(i));
+            if (i == 1) controller.arrow2.setLayoutX(serverMessage.arrowsPositionX.get(i));
+            if (i == 2) controller.arrow3.setLayoutX(serverMessage.arrowsPositionX.get(i));
+            if (i == 3) controller.arrow4.setLayoutX(serverMessage.arrowsPositionX.get(i));
+        }
+    }
+
 
 
 }

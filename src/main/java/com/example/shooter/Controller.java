@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 
@@ -54,6 +55,14 @@ public class Controller {
     public Label shotCounter3;
     @FXML
     public Label shotCounter4;
+    @FXML
+    public Rectangle arrow1;
+    @FXML
+    public Rectangle arrow2;
+    @FXML
+    public Rectangle arrow3;
+    @FXML
+    public Rectangle arrow4;
 
 
 
@@ -68,11 +77,14 @@ public class Controller {
 
     @FXML
     void onButtonReadyPressed(ActionEvent event) throws IOException {
+        System.out.println("Ready Pressed");
         client.clientState.isReady = true;
     }
 
     @FXML
     void onButtonShootPressed(ActionEvent event) {
+        System.out.println("Ready Pressed");
+        client.clientState.shot = true;
 
     }
 
