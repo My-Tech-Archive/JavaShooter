@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Server {
 
     public static int sleepTime = 5;
+    public static int clientSleepTime = 5;
 
     int port = 8001;
     public ServerState serverState = new ServerState();
@@ -51,11 +52,14 @@ public class Server {
             while (true) {
                 try {
                     Socket clientSocket = serverSocket.accept();
+                    // Создаем подключение игрока
+                    // И, если еще не было создано диалога на стороне сервера, создаем его. Он будет единственным, который будет обслуживать всех клиентов
                     Connection connection = new Connection(clientSocket);
                     if (serverDialog == null) {
                         serverDialog = new ServerDialog(this);
                         serverDialog.start();
                     }
+                    // Добавляем в диалог новое подключение
                     serverDialog.connections.add(connection);
                     System.out.println("Client connected");
                 }
@@ -66,6 +70,7 @@ public class Server {
 
         resetGame();
 
+        // Собственный поток для обновления состояния игры
         while (true) {
             updateServerState();
             if (serverState.gameIsStarted) handleGame();

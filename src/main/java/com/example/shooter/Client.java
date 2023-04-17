@@ -22,6 +22,7 @@ public class Client extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        // Загрузка интерфейса
         FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("window.fxml"));
         Scene scene = new Scene(fxmlLoader.
                 load(), 1200, 800);
@@ -39,13 +40,17 @@ public class Client extends Application {
     public void connectToServer(String playerName) throws IOException {
         try {
             InetAddress address = InetAddress.getLocalHost();
+            // Создаем сокет
             Socket socket = new Socket(address, port);
+            // Создаем поток-диалог для клиента, который постоянно будет принимать и передавать ему данные
             dialog = new ClientDialog(clientState, socket);
             dialog.start();
+            // Состояние клиента постоянно передается на сервер. Запишем в него имя подключившегося игрока и то, что он еще не готов к игре
             clientState.playerName = playerName;
             clientState.isReady = false;
             System.out.println("Connect request");
 
+            // Создание нового потока с функцией обновления интерфейса согласно данным с сервера
             new Thread(()-> {
                 while (true) {
                     if (dialog != null) updateState();
@@ -60,6 +65,7 @@ public class Client extends Application {
 
 
     public void updateState() {
+        // Клиентский диалог принимает состояние сервера. Оттуда берем данные и используем их для обновления состояния интерфейса
         if (dialog.serverState == null) return;
 
         Platform.runLater(()->{

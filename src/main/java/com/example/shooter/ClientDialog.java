@@ -27,17 +27,22 @@ public class ClientDialog extends Thread {
 
     public void run() {
         try {
+            // По сути, каждый кадр клиентский диалог ожидает приема данных от сервера и каждый кадр отправляет на сервер состояние клиента
+
             while (true) {
+                // Ждем от сервера данных
                 if (dataFromServer.available() > 0) {
+                    // Опа, пришли, парсим их из джейсона
                     serverState = gson.fromJson(dataFromServer.readUTF(), ServerState.class);
                 }
 
+                // Постоянно отправляет состояние клиента на сервер
                 dataToServer.flush();
                 dataToServer.writeUTF(gson.toJson(clientState, ClientState.class));
 
                 clientState.shot = false;
 
-                try { Thread.sleep(Server.sleepTime); }
+                try { Thread.sleep(Server.clientSleepTime); }
                 catch (Exception e) { }
             }
 

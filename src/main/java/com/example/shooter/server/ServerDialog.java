@@ -24,6 +24,7 @@ public class ServerDialog extends Thread {
     public void run() {
         try {
             while (true) {
+                // От каждого клиента постоянно принимаем его состояние
                 for (int i = 0; i < connections.size(); i++) {
                     if (connections.get(i).dataFromClient.available() > 0) {
                         var clientState = gson.fromJson(connections.get(i).dataFromClient.readUTF(), ClientState.class);
