@@ -16,8 +16,8 @@ public class Client extends Application {
     int port = 8001;
     Controller controller;
 
-    public ClientState clientState = new ClientState();
-    ClientDialog dialog;
+    public ClientModel clientState = new ClientModel();
+    ClientConnect dialog;
 
 
     @Override
@@ -44,7 +44,7 @@ public class Client extends Application {
             Socket socket = new Socket(address, port);
 
             // Создаем поток-диалог для клиента, который постоянно будет принимать и передавать ему данные
-            dialog = new ClientDialog(clientState, socket);
+            dialog = new ClientConnect(clientState, socket);
             dialog.start();
             // Состояние клиента постоянно передается на сервер. Запишем в него имя подключившегося игрока и то, что он еще не готов к игре
             clientState.playerName = playerName;
@@ -57,7 +57,7 @@ public class Client extends Application {
             new Thread(()-> {
                 while (true) {
                     if (dialog != null) updateInterface();
-                    try { Thread.sleep(Server.sleepTime); }
+                    try { Thread.sleep(Server.clientSleepTime); }
                     catch (Exception e) { }
                 }
             }).start();
@@ -92,13 +92,13 @@ public class Client extends Application {
 
 
 
-    private void updateTargets(ServerState gameState) {
+    private void updateTargets(ServerModel gameState) {
         controller.bigTarget.setLayoutY(gameState.bigTargetY);
         controller.smallTarget.setLayoutY(gameState.smallTargetY);
     }
 
 
-    private void updatePlayerNames(ServerState gameState) {
+    private void updatePlayerNames(ServerModel gameState) {
         for (int i = 0; i < gameState.playerNames.size(); i++) {
 
 
@@ -122,7 +122,7 @@ public class Client extends Application {
         }
     }
 
-    private void updateReady(ServerState serverMessage) {
+    private void updateReady(ServerModel serverMessage) {
         for (int i = 0; i < serverMessage.playersReady.size(); i++) {
             if (i == 0) {
                 if (serverMessage.playersReady.get(i)) {
@@ -167,7 +167,7 @@ public class Client extends Application {
         }
     }
 
-    private void updateArrows(ServerState serverMessage) {
+    private void updateArrows(ServerModel serverMessage) {
         for (int i = 0; i < serverMessage.arrowsPositionX.size(); i++) {
             if (i == 0) controller.arrow1.setLayoutX(serverMessage.arrowsPositionX.get(i));
             if (i == 1) controller.arrow2.setLayoutX(serverMessage.arrowsPositionX.get(i));
@@ -176,7 +176,7 @@ public class Client extends Application {
         }
     }
 
-    private void updateScores(ServerState serverMessage) {
+    private void updateScores(ServerModel serverMessage) {
         for (int i = 0; i < serverMessage.playerScores.size(); i++) {
             if (i == 0) controller.score1.setText("Score: " + serverMessage.playerScores.get(i).toString());
             if (i == 1) controller.score2.setText("Score: " + serverMessage.playerScores.get(i).toString());
@@ -185,7 +185,7 @@ public class Client extends Application {
         }
     }
 
-    private void updateShotCounters(ServerState serverMessage) {
+    private void updateShotCounters(ServerModel serverMessage) {
         for (int i = 0; i < serverMessage.playerShots.size(); i++) {
             if (i == 0) {
                 controller.shotCounter1.setVisible(true);
@@ -206,7 +206,7 @@ public class Client extends Application {
         }
     }
 
-    private void updateWinWindow(ServerState serverMessage) {
+    private void updateWinWindow(ServerModel serverMessage) {
         if (serverMessage.winner.length() > 0) {
             controller.winnerPanel.setVisible(true);
             controller.winnerText.setText("Winner: " + serverMessage.winner);

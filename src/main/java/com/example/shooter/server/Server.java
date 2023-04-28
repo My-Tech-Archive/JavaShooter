@@ -1,6 +1,6 @@
 package com.example.shooter.server;
 
-import com.example.shooter.ClientState;
+import com.example.shooter.ClientModel;
 import com.example.shooter.Tools;
 
 import java.io.IOException;
@@ -14,9 +14,9 @@ public class Server {
     public static int clientSleepTime = 5;
 
     int port = 8001;
-    public ServerState serverState = new ServerState();
-    public ArrayList<ClientState> clientStates = new ArrayList<>();
-    ServerDialog serverDialog;
+    public ServerModel serverState = new ServerModel();
+    public ArrayList<ClientModel> clientStates = new ArrayList<>();
+    ServerConnect serverConnect;
 
     double targetSpeed = 1;
     double arrowSpeed = 7;
@@ -55,14 +55,14 @@ public class Server {
                     Socket clientSocket = serverSocket.accept();
                     // Создаем подключение игрока
                     // И, если еще не было создано диалога на стороне сервера, создаем его. Он будет единственным, который будет обслуживать всех клиентов
-                    Connection connection = new Connection(clientSocket);
-                    if (serverDialog == null) {
-                        serverDialog = new ServerDialog(this);
-                        serverDialog.start();
+                    ConnectStream connection = new ConnectStream(clientSocket);
+                    if (serverConnect == null) {
+                        serverConnect = new ServerConnect(this);
+                        serverConnect.start();
                     }
                     // Добавляем в диалог новое подключение, чтобы он понимал, кто к нему подключен
                     // И мог отправлять подключенным клиентам данные
-                    serverDialog.connections.add(connection);
+                    serverConnect.connections.add(connection);
                     System.out.println("Client connected");
                 }
                 catch (IOException e) { }
@@ -78,7 +78,7 @@ public class Server {
             updateServerState();
             if (serverState.gameIsStarted) handleGame();
 
-            if (serverDialog != null) serverDialog.send();
+            if (serverConnect != null) serverConnect.send();
 
             try { Thread.sleep(Server.sleepTime); }
             catch (Exception e) { }
@@ -180,7 +180,7 @@ public class Server {
         // Для каждого игрока
         for (int i = 0; i < clientStates.size(); i++) {
             // В зависимости от количества игроков
-            ClientState clientState = clientStates.get(i);
+            ClientModel clientState = clientStates.get(i);
             if (clientState == null) continue;
 
             if (serverState.playerNames.size() == i) {

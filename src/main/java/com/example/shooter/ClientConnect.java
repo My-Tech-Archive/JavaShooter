@@ -1,7 +1,7 @@
 package com.example.shooter;
 
 import com.example.shooter.server.Server;
-import com.example.shooter.server.ServerState;
+import com.example.shooter.server.ServerModel;
 import com.google.gson.Gson;
 
 import java.io.DataInputStream;
@@ -9,17 +9,17 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class ClientDialog extends Thread {
+public class ClientConnect extends Thread {
 
-    ClientState clientState;
-    public ServerState serverState;
+    ClientModel clientState;
+    public ServerModel serverState;
     DataOutputStream dataToServer;
     DataInputStream dataFromServer;
     Gson gson = new Gson();
 
 
     // Конструктор
-    public ClientDialog(ClientState clientState, Socket clientSocket) throws IOException {
+    public ClientConnect(ClientModel clientState, Socket clientSocket) throws IOException {
         this.clientState = clientState;
 
         dataToServer = new DataOutputStream(clientSocket.getOutputStream());
@@ -36,12 +36,12 @@ public class ClientDialog extends Thread {
                 // Ждем от сервера данных
                 if (dataFromServer.available() > 0) {
                     // Опа, пришли, парсим их из джейсона
-                    serverState = gson.fromJson(dataFromServer.readUTF(), ServerState.class);
+                    serverState = gson.fromJson(dataFromServer.readUTF(), ServerModel.class);
                 }
 
                 // Постоянно отправляет состояние клиента на сервер
                 dataToServer.flush(); // Очистка потока
-                dataToServer.writeUTF(gson.toJson(clientState, ClientState.class));
+                dataToServer.writeUTF(gson.toJson(clientState, ClientModel.class));
 
                 clientState.shot = false;
 
