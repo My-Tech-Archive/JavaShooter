@@ -51,6 +51,7 @@ public class Server {
         new Thread(()->{
             while (true) {
                 try {
+                    // accept ждет подключения нового клиента.
                     Socket clientSocket = serverSocket.accept();
                     // Создаем подключение игрока
                     // И, если еще не было создано диалога на стороне сервера, создаем его. Он будет единственным, который будет обслуживать всех клиентов
@@ -59,7 +60,8 @@ public class Server {
                         serverDialog = new ServerDialog(this);
                         serverDialog.start();
                     }
-                    // Добавляем в диалог новое подключение
+                    // Добавляем в диалог новое подключение, чтобы он понимал, кто к нему подключен
+                    // И мог отправлять подключенным клиентам данные
                     serverDialog.connections.add(connection);
                     System.out.println("Client connected");
                 }
@@ -72,8 +74,10 @@ public class Server {
 
         // Собственный поток для обновления состояния игры
         while (true) {
+            // Обновление данных сервера на основе полученной модели от клиента
             updateServerState();
             if (serverState.gameIsStarted) handleGame();
+
             if (serverDialog != null) serverDialog.send();
 
             try { Thread.sleep(Server.sleepTime); }
@@ -173,12 +177,15 @@ public class Server {
         boolean allPlayersReady = true;
         if (clientStates.size() == 0) allPlayersReady = false;
 
+        // Для каждого игрока
         for (int i = 0; i < clientStates.size(); i++) {
+            // В зависимости от количества игроков
             ClientState clientState = clientStates.get(i);
             if (clientState == null) continue;
 
             if (serverState.playerNames.size() == i) {
 
+                // Заполнение листов данными от игроков
                 if (serverState.playerNames.contains(clientState.playerName))
                     serverState.playerNames.add(clientState.playerName + "1");
                 else serverState.playerNames.add(clientState.playerName);

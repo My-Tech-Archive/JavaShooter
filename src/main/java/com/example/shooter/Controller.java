@@ -72,6 +72,7 @@ public class Controller {
 
     @FXML
     void onButtonConnectToServerPressed(ActionEvent event) throws IOException {
+        // Когда нажали на кнопку "подключиться" срабатывает эта функция
         String playerName = nameField.getText();
         client.connectToServer(playerName);
         connectPanel.setVisible(false);

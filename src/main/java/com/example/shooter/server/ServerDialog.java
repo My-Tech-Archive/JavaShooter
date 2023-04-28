@@ -27,7 +27,9 @@ public class ServerDialog extends Thread {
                 // От каждого клиента постоянно принимаем его состояние
                 for (int i = 0; i < connections.size(); i++) {
                     if (connections.get(i).dataFromClient.available() > 0) {
+                        // Получаем данные от клиента
                         var clientState = gson.fromJson(connections.get(i).dataFromClient.readUTF(), ClientState.class);
+
                         if (server.clientStates.size() == i) server.clientStates.add(clientState);
                         else server.clientStates.set(i, clientState);
                     }
@@ -40,6 +42,7 @@ public class ServerDialog extends Thread {
         catch (IOException e) {} catch (InterruptedException e) {}
     }
 
+    // Отправка состояния сервера всем подключенным клиентам
     public void send() throws IOException {
         for (int i = 0; i < connections.size(); i++) {
             connections.get(i).dataToClient.flush();

@@ -15,7 +15,6 @@ public class ServerState {
     public String winner = "";
 
 
-
     public boolean gameIsStarted = false;
 
     public double bigTargetY;

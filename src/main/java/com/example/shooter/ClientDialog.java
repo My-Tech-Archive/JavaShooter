@@ -18,13 +18,16 @@ public class ClientDialog extends Thread {
     Gson gson = new Gson();
 
 
+    // Конструктор
     public ClientDialog(ClientState clientState, Socket clientSocket) throws IOException {
         this.clientState = clientState;
+
         dataToServer = new DataOutputStream(clientSocket.getOutputStream());
         dataFromServer = new DataInputStream(clientSocket.getInputStream());
     }
 
 
+    // Каждый временной отрезок (5 милисек) отрабатывает функция run
     public void run() {
         try {
             // По сути, каждый кадр клиентский диалог ожидает приема данных от сервера и каждый кадр отправляет на сервер состояние клиента
@@ -37,7 +40,7 @@ public class ClientDialog extends Thread {
                 }
 
                 // Постоянно отправляет состояние клиента на сервер
-                dataToServer.flush();
+                dataToServer.flush(); // Очистка потока
                 dataToServer.writeUTF(gson.toJson(clientState, ClientState.class));
 
                 clientState.shot = false;

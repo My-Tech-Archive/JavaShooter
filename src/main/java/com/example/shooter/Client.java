@@ -24,8 +24,7 @@ public class Client extends Application {
     public void start(Stage stage) throws IOException {
         // Загрузка интерфейса
         FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("window.fxml"));
-        Scene scene = new Scene(fxmlLoader.
-                load(), 1200, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         controller = fxmlLoader.getController();
         controller.client = this;
 
@@ -39,9 +38,11 @@ public class Client extends Application {
 
     public void connectToServer(String playerName) throws IOException {
         try {
+            // Получаем локальный хост
             InetAddress address = InetAddress.getLocalHost();
             // Создаем сокет
             Socket socket = new Socket(address, port);
+
             // Создаем поток-диалог для клиента, который постоянно будет принимать и передавать ему данные
             dialog = new ClientDialog(clientState, socket);
             dialog.start();
@@ -50,10 +51,12 @@ public class Client extends Application {
             clientState.isReady = false;
             System.out.println("Connect request");
 
+
+
             // Создание нового потока с функцией обновления интерфейса согласно данным с сервера
             new Thread(()-> {
                 while (true) {
-                    if (dialog != null) updateState();
+                    if (dialog != null) updateInterface();
                     try { Thread.sleep(Server.sleepTime); }
                     catch (Exception e) { }
                 }
@@ -64,10 +67,11 @@ public class Client extends Application {
 
 
 
-    public void updateState() {
+    public void updateInterface() {
         // Клиентский диалог принимает состояние сервера. Оттуда берем данные и используем их для обновления состояния интерфейса
         if (dialog.serverState == null) return;
 
+        // Platform.runLater разрешает изменение интерфейса вне основного потока
         Platform.runLater(()->{
             updatePlayerNames(dialog.serverState);
             updateReady(dialog.serverState);
