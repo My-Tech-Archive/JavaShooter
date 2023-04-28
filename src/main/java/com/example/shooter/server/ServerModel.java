@@ -3,7 +3,7 @@ package com.example.shooter.server;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServerState {
+public class ServerModel {
     // Состояние сервера, которое постоянно отправляется клиентам
 
     public List<String> playerNames = new ArrayList<>();

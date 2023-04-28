@@ -1,13 +1,12 @@
 package com.example.shooter;
 
-import com.example.shooter.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Polygon;
 
 import java.io.IOException;
 
@@ -56,13 +55,13 @@ public class Controller {
     @FXML
     public Label shotCounter4;
     @FXML
-    public Rectangle arrow1;
+    public Polygon arrow1;
     @FXML
-    public Rectangle arrow2;
+    public Polygon arrow2;
     @FXML
-    public Rectangle arrow3;
+    public Polygon arrow3;
     @FXML
-    public Rectangle arrow4;
+    public Polygon arrow4;
     @FXML
     public AnchorPane winnerPanel;
     @FXML
@@ -74,25 +73,25 @@ public class Controller {
     void onButtonConnectToServerPressed(ActionEvent event) throws IOException {
         // Когда нажали на кнопку "подключиться" срабатывает эта функция
         String playerName = nameField.getText();
-        client.connectToServer(playerName);
+        client.connect(playerName);
         connectPanel.setVisible(false);
     }
 
 
     @FXML
     void onButtonReadyPressed(ActionEvent event) throws IOException {
-        client.clientState.isReady = true;
+        client.clientRequests.isReady = true;
     }
 
     @FXML
     void onButtonShootPressed(ActionEvent event) {
-        client.clientState.shot = true;
+        client.clientRequests.shot = true;
 
     }
 
     @FXML
     void onButtonStopPressed(ActionEvent event) {
-        client.clientState.isReady = false;
+        client.clientRequests.isReady = false;
 
     }
 

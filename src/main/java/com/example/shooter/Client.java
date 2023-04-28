@@ -16,15 +16,15 @@ public class Client extends Application {
     int port = 8001;
     Controller controller;
 
-    public ClientState clientState = new ClientState();
-    ClientDialog dialog;
+    public ClientRequests clientRequests = new ClientRequests();
+    ClientChannel dialog;
 
 
     @Override
     public void start(Stage stage) throws IOException {
         // Загрузка интерфейса
         FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("window.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 700);
         controller = fxmlLoader.getController();
         controller.client = this;
 
@@ -36,27 +36,25 @@ public class Client extends Application {
     }
 
 
-    public void connectToServer(String playerName) throws IOException {
+    public void connect(String playerName) throws IOException {
         try {
-            // Получаем локальный хост
             InetAddress address = InetAddress.getLocalHost();
             // Создаем сокет
             Socket socket = new Socket(address, port);
 
-            // Создаем поток-диалог для клиента, который постоянно будет принимать и передавать ему данные
-            dialog = new ClientDialog(clientState, socket);
+            dialog = new ClientChannel(clientRequests, socket);
             dialog.start();
-            // Состояние клиента постоянно передается на сервер. Запишем в него имя подключившегося игрока и то, что он еще не готов к игре
-            clientState.playerName = playerName;
-            clientState.isReady = false;
+
+            clientRequests.playerName = playerName;
+            clientRequests.isReady = false;
             System.out.println("Connect request");
 
 
 
-            // Создание нового потока с функцией обновления интерфейса согласно данным с сервера
+            // Обновления интерфейса
             new Thread(()-> {
                 while (true) {
-                    if (dialog != null) updateInterface();
+                    if (dialog != null) updateUI();
                     try { Thread.sleep(Server.sleepTime); }
                     catch (Exception e) { }
                 }
@@ -67,21 +65,19 @@ public class Client extends Application {
 
 
 
-    public void updateInterface() {
-        // Клиентский диалог принимает состояние сервера. Оттуда берем данные и используем их для обновления состояния интерфейса
-        if (dialog.serverState == null) return;
+    public void updateUI() {
+        if (dialog.serverModel == null) return;
 
-        // Platform.runLater разрешает изменение интерфейса вне основного потока
         Platform.runLater(()->{
-            updatePlayerNames(dialog.serverState);
-            updateReady(dialog.serverState);
+            updatePlayerNames(dialog.serverModel);
+            updateReady(dialog.serverModel);
 
-            if (dialog.serverState.gameIsStarted) {
-                updateTargets(dialog.serverState);
-                updateArrows(dialog.serverState);
-                updateScores(dialog.serverState);
-                updateShotCounters(dialog.serverState);
-                updateWinWindow(dialog.serverState);
+            if (dialog.serverModel.gameIsStarted) {
+                updateTargets(dialog.serverModel);
+                updateArrows(dialog.serverModel);
+                updateScores(dialog.serverModel);
+                updateShotCounters(dialog.serverModel);
+                updateWinWindow(dialog.serverModel);
             }
 
         });
@@ -92,13 +88,13 @@ public class Client extends Application {
 
 
 
-    private void updateTargets(ServerState gameState) {
+    private void updateTargets(ServerModel gameState) {
         controller.bigTarget.setLayoutY(gameState.bigTargetY);
         controller.smallTarget.setLayoutY(gameState.smallTargetY);
     }
 
 
-    private void updatePlayerNames(ServerState gameState) {
+    private void updatePlayerNames(ServerModel gameState) {
         for (int i = 0; i < gameState.playerNames.size(); i++) {
 
 
@@ -122,7 +118,7 @@ public class Client extends Application {
         }
     }
 
-    private void updateReady(ServerState serverMessage) {
+    private void updateReady(ServerModel serverMessage) {
         for (int i = 0; i < serverMessage.playersReady.size(); i++) {
             if (i == 0) {
                 if (serverMessage.playersReady.get(i)) {
@@ -167,7 +163,7 @@ public class Client extends Application {
         }
     }
 
-    private void updateArrows(ServerState serverMessage) {
+    private void updateArrows(ServerModel serverMessage) {
         for (int i = 0; i < serverMessage.arrowsPositionX.size(); i++) {
             if (i == 0) controller.arrow1.setLayoutX(serverMessage.arrowsPositionX.get(i));
             if (i == 1) controller.arrow2.setLayoutX(serverMessage.arrowsPositionX.get(i));
@@ -176,7 +172,7 @@ public class Client extends Application {
         }
     }
 
-    private void updateScores(ServerState serverMessage) {
+    private void updateScores(ServerModel serverMessage) {
         for (int i = 0; i < serverMessage.playerScores.size(); i++) {
             if (i == 0) controller.score1.setText("Score: " + serverMessage.playerScores.get(i).toString());
             if (i == 1) controller.score2.setText("Score: " + serverMessage.playerScores.get(i).toString());
@@ -185,7 +181,7 @@ public class Client extends Application {
         }
     }
 
-    private void updateShotCounters(ServerState serverMessage) {
+    private void updateShotCounters(ServerModel serverMessage) {
         for (int i = 0; i < serverMessage.playerShots.size(); i++) {
             if (i == 0) {
                 controller.shotCounter1.setVisible(true);
@@ -206,11 +202,11 @@ public class Client extends Application {
         }
     }
 
-    private void updateWinWindow(ServerState serverMessage) {
+    private void updateWinWindow(ServerModel serverMessage) {
         if (serverMessage.winner.length() > 0) {
             controller.winnerPanel.setVisible(true);
             controller.winnerText.setText("Winner: " + serverMessage.winner);
-            clientState.isReady = false;
+            clientRequests.isReady = false;
         }
     }
 

@@ -7,17 +7,17 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Arc?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #E0E3D2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shooter.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="1200.0" style="-fx-background-color: #E0E3D2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shooter.Controller">
    <children>
-      <AnchorPane layoutX="908.0" prefHeight="800.0" prefWidth="292.0" style="-fx-background-color: #3786C9;" AnchorPane.rightAnchor="0.0">
+      <AnchorPane layoutX="908.0" prefHeight="709.0" prefWidth="292.0" style="-fx-background-color: #575A6D;" AnchorPane.rightAnchor="0.0">
          <effect>
             <Blend mode="ADD" opacity="0.0" />
          </effect>
@@ -35,17 +35,17 @@
                <children>
                   <Label fx:id="playerName1" layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="235.0" text="PlayerName 1" textAlignment="CENTER" textFill="#ffbf00">
                      <font>
-                        <Font name="Impact" size="30.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score1" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="#68ff50" visible="false">
+                  <Label fx:id="score1" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="WHITE" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Label fx:id="shotCounter1" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="#41d9ff" visible="false">
+                  <Label fx:id="shotCounter1" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="WHITE" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
                </children>
@@ -60,17 +60,17 @@
                <children>
                   <Label fx:id="playerName2" layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="235.0" text="PlayerName 2" textAlignment="CENTER" textFill="#ff3e3e">
                      <font>
-                        <Font name="Impact" size="30.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score2" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="#68ff50" visible="false">
+                  <Label fx:id="score2" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="WHITE" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Label fx:id="shotCounter2" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="#41d9ff" visible="false">
+                  <Label fx:id="shotCounter2" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="WHITE" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
                </children>
@@ -85,17 +85,17 @@
                <children>
                   <Label fx:id="playerName3" layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="235.0" text="PlayerName 3" textAlignment="CENTER" textFill="#42d93b">
                      <font>
-                        <Font name="Impact" size="30.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score3" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="#68ff50" visible="false">
+                  <Label fx:id="score3" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="WHITE" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Label fx:id="shotCounter3" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="#41d9ff" visible="false">
+                  <Label fx:id="shotCounter3" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="WHITE" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
                </children>
@@ -110,84 +110,44 @@
                <children>
                   <Label fx:id="playerName4" layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="235.0" text="PlayerName 4" textAlignment="CENTER" textFill="#2188ff">
                      <font>
-                        <Font name="Impact" size="30.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score4" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="#68ff50" visible="false">
+                  <Label fx:id="score4" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="WHITE" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
-                  <Label fx:id="shotCounter4" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="#41d9ff" visible="false">
+                  <Label fx:id="shotCounter4" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="WHITE" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="-3.0" layoutY="674.0" prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #575A6D;">
-         <children>
-            <Button layoutX="640.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonStopPressed" prefHeight="60.0" prefWidth="208.0" style="-fx-background-color: #B4C640;" text="Stop Game" textFill="#454545">
-               <font>
-                  <Font name="Impact" size="31.0" />
-               </font>
-            </Button>
-            <Button layoutX="51.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonReadyPressed" prefHeight="60.0" prefWidth="208.0" style="-fx-background-color: #B4C640;" text="Ready" textFill="#454545">
-               <font>
-                  <Font name="Impact" size="31.0" />
-               </font>
-            </Button>
-            <Button layoutX="351.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonShootPressed" prefHeight="60.0" prefWidth="208.0" style="-fx-background-color: #7CE700;" text="Shoot" textFill="#454545">
-               <font>
-                  <Font name="Impact" size="31.0" />
-               </font>
-            </Button>
-            <AnchorPane fx:id="connectPanel" prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #575A6D;">
-               <children>
-                  <Button layoutX="526.0" layoutY="27.0" mnemonicParsing="false" onAction="#onButtonConnectToServerPressed" prefHeight="68.0" prefWidth="226.0" style="-fx-background-color: #7CE700;" text="Connect" textFill="#454545">
-                     <font>
-                        <Font name="Impact" size="37.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="nameField" layoutX="138.0" layoutY="24.0" prefHeight="78.0" prefWidth="332.0" promptText="Enter your name">
-                     <font>
-                        <Font size="37.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="winnerPanel" prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #575A6D;" visible="false">
-               <children>
-                  <Button layoutX="596.0" layoutY="27.0" mnemonicParsing="false" onAction="#onButtonPlayAgainPressed" prefHeight="68.0" prefWidth="226.0" style="-fx-background-color: #7CE700;" text="Play Again" textFill="#454545">
-                     <font>
-                        <Font name="Impact" size="37.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="winnerText" layoutX="92.0" layoutY="37.0" prefHeight="50.0" prefWidth="442.0" text="Winner:" textFill="#ffda00">
-                     <font>
-                        <Font name="Impact" size="40.0" />
+                        <Font name="System Bold" size="31.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-2.0" layoutY="1.0" prefHeight="674.0" prefWidth="910.0">
+      <AnchorPane layoutX="-2.0" layoutY="1.0" prefHeight="674.0" prefWidth="910.0" style="-fx-background-color: #90d12e;">
          <children>
+            <Line endX="882.5999755859375" endY="710.9000244140625" layoutX="-165.0" layoutY="-7.0" startX="882.5999755859375" startY="7.000000476837158" strokeWidth="3.0" />
+            <Line endX="882.5999755859375" endY="720.7000122070312" layoutX="-45.0" layoutY="-16.0" startX="882.5999755859375" startY="7.000000476837158" strokeWidth="3.0" />
             <Circle fx:id="bigTarget" layoutX="715.0" layoutY="326.0" radius="55.0" stroke="BLACK" strokeType="INSIDE">
                <fill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.720183538734366">
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.4908257843157567">
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="0.7058823704719543" green="0.7764706015586853" blue="0.250980406999588" />
+                              <Color red="0.7703045606613159" blue="1.0" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.009421265141318991">
+                           <color>
+                              <Color red="0.7703045606613159" blue="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.21568627655506134" green="0.5254902243614197" blue="0.7882353067398071" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
@@ -196,118 +156,77 @@
             </Circle>
             <Circle fx:id="smallTarget" layoutX="838.0" layoutY="326.0" radius="30.0" stroke="BLACK" strokeType="INSIDE">
                <fill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.720183538734366">
+                  <RadialGradient centerX="0.5" centerY="0.4962121428865375" radius="0.40825688073394495">
                      <stops>
                         <Stop>
                            <color>
-                              <Color red="1.0" green="0.550000011920929" />
+                              <Color red="1.0" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.21568627655506134" green="0.5254902243614197" blue="0.7882353067398071" />
+                              <Color red="1.0" green="1.0" blue="1.0" />
                            </color>
                         </Stop>
                      </stops>
                   </RadialGradient>
                </fill>
             </Circle>
-            <Arc fill="#2188ff" layoutX="111.0" layoutY="184.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Arc fill="#ff3e3e" layoutX="111.0" layoutY="385.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Arc fill="#3fd939" layoutX="111.0" layoutY="487.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Arc fill="#ffbf00" layoutX="111.0" layoutY="288.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Rectangle fx:id="arrow3" arcHeight="5.0" arcWidth="5.0" height="21.0" layoutX="40.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="80.0">
-               <fill>
-                  <LinearGradient endX="0.6174242279746316">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006729475100942127">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.24705882370471954" green="0.8509804010391235" blue="0.2235294133424759" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="arrow2" arcHeight="5.0" arcWidth="5.0" height="21.0" layoutX="40.0" layoutY="375.0" stroke="BLACK" strokeType="INSIDE" width="80.0">
-               <fill>
-                  <LinearGradient endX="0.6174242279746316" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006729475100942127">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.24313725531101227" blue="0.24313725531101227" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="arrow1" arcHeight="5.0" arcWidth="5.0" height="21.0" layoutX="40.0" layoutY="278.0" stroke="BLACK" strokeType="INSIDE" width="80.0">
-               <fill>
-                  <LinearGradient endX="0.6174242279746316" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006729475100942127">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.7490196228027344" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
-            <Rectangle fx:id="arrow4" arcHeight="5.0" arcWidth="5.0" height="21.0" layoutX="40.0" layoutY="174.0" stroke="BLACK" strokeType="INSIDE" width="80.0">
-               <fill>
-                  <LinearGradient endX="0.6174242279746316" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.006729475100942127">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.12941177189350128" green="0.5333333611488342" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Rectangle>
+            <Arc fill="#5e5e5e" layoutX="111.0" layoutY="184.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Arc fill="#5e5e5e" layoutX="111.0" layoutY="385.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Arc fill="#5e5e5e" layoutX="111.0" layoutY="487.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Arc fill="#5e5e5e" layoutX="111.0" layoutY="288.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <AnchorPane fx:id="winnerPanel" prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #90d12e;" visible="false">
+               <children>
+                  <Button layoutX="596.0" layoutY="27.0" mnemonicParsing="false" onAction="#onButtonPlayAgainPressed" prefHeight="68.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF;" text="Play Again" textFill="#454545">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="winnerText" layoutX="92.0" layoutY="37.0" prefHeight="50.0" prefWidth="442.0" text="Winner:">
+                     <font>
+                        <Font name="Impact" size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="566.0" prefHeight="141.0" prefWidth="667.0" style="-fx-background-color: #90d12e;">
+               <children>
+                  <Button layoutX="319.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonStopPressed" prefHeight="60.0" prefWidth="122.0" style="-fx-background-color: #FFFFFF;" text="Pause" textFill="#454545">
+                     <font>
+                        <Font name="Impact" size="31.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="36.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonReadyPressed" prefHeight="60.0" prefWidth="138.0" style="-fx-background-color: #FFFFFF;" text="Ready" textFill="#454545">
+                     <font>
+                        <Font name="Impact" size="31.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="187.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonShootPressed" prefHeight="60.0" prefWidth="122.0" style="-fx-background-color: #FFFFFF;" text="Shoot" textFill="#454545">
+                     <font>
+                        <Font name="Impact" size="31.0" />
+                     </font>
+                  </Button>
+                  <AnchorPane fx:id="connectPanel" layoutY="14.0" prefHeight="126.0" prefWidth="669.0" style="-fx-background-color: #90d12e;">
+                     <children>
+                        <Button layoutX="370.0" layoutY="24.0" mnemonicParsing="false" onAction="#onButtonConnectToServerPressed" prefHeight="68.0" prefWidth="226.0" style="-fx-background-color: #575A6D;" text="Connect" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="37.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="nameField" layoutX="14.0" layoutY="23.0" prefHeight="78.0" prefWidth="332.0" promptText="Enter your name">
+                           <font>
+                              <Font size="37.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <Polygon fx:id="arrow4" fill="#ffac1f" layoutX="131.0" layoutY="159.0" points="-50.0, 40.0, 4.199981689453125, 25.000030517578125, -50.00000762939453, 8.800018310546875" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="arrow1" fill="#ff1f1f" layoutX="133.0" layoutY="263.0" points="-50.0, 40.0, 4.199981689453125, 25.000030517578125, -50.00000762939453, 8.800018310546875" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="arrow2" fill="DODGERBLUE" layoutX="133.0" layoutY="360.0" points="-50.0, 40.0, 4.199981689453125, 25.000030517578125, -50.00000762939453, 8.800018310546875" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="arrow3" fill="#1fff1f" layoutX="130.0" layoutY="462.0" points="-50.0, 40.0, 4.199981689453125, 25.000030517578125, -50.00000762939453, 8.800018310546875" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </AnchorPane>
    </children>
