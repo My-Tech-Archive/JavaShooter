@@ -56,13 +56,13 @@ public class Controller {
     @FXML
     public Label shotCounter4;
     @FXML
-    public Rectangle arrow1;
+    public Circle arrow1;
     @FXML
-    public Rectangle arrow2;
+    public Circle arrow2;
     @FXML
-    public Rectangle arrow3;
+    public Circle arrow3;
     @FXML
-    public Rectangle arrow4;
+    public Circle arrow4;
     @FXML
     public AnchorPane winnerPanel;
     @FXML
