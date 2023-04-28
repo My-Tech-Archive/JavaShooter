@@ -23,8 +23,8 @@ public class Server {
     double arrowRightLimitX = 850;
     double arrowStartPosX = 40;
 
-    int highTargetLimitY = 50;
-    int lowTargetLimitY = 620;
+    int highTargetLimitY = 150;
+    int lowTargetLimitY = 520;
 
     boolean bigTargetMoveUp = false;
     double bigTargetRadius = 55;

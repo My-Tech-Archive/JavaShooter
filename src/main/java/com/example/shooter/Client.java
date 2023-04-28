@@ -24,7 +24,7 @@ public class Client extends Application {
     public void start(Stage stage) throws IOException {
         // Загрузка интерфейса
         FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("window.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 600);
         controller = fxmlLoader.getController();
         controller.client = this;
 

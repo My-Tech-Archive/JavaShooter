@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #E0E3D2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shooter.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="1200.0" style="-fx-background-color: #E0E3D2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shooter.Controller">
    <children>
-      <AnchorPane layoutX="908.0" prefHeight="800.0" prefWidth="292.0" style="-fx-background-color: #FFF3E0;" AnchorPane.rightAnchor="0.0">
+      <AnchorPane layoutX="908.0" layoutY="1.0" prefHeight="619.0" prefWidth="292.0" style="-fx-background-color: #FFF3E0;" AnchorPane.rightAnchor="0.0">
          <effect>
             <Blend mode="ADD" opacity="0.0" />
          </effect>
@@ -123,7 +123,21 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-3.0" layoutY="674.0" prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #fff3e0;">
+      <AnchorPane layoutX="-2.0" layoutY="1.0" prefHeight="600.0" prefWidth="910.0" style="-fx-background-color: #ffdca6;">
+         <children>
+            <Circle fx:id="bigTarget" fill="#ffd300" layoutX="715.0" layoutY="326.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="smallTarget" fill="#ff5500" layoutX="838.0" layoutY="326.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Arc fill="#ff8500" layoutX="111.0" layoutY="184.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Arc fill="#ff4646" layoutX="111.0" layoutY="385.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Arc fill="#0f9e05" layoutX="111.0" layoutY="487.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Arc fill="#0099a6" layoutX="111.0" layoutY="288.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <Rectangle fx:id="arrow3" arcHeight="5.0" arcWidth="5.0" fill="#6b6b6b" height="14.0" layoutX="120.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="arrow2" arcHeight="5.0" arcWidth="5.0" fill="#808080" height="14.0" layoutX="120.0" layoutY="378.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="arrow1" arcHeight="5.0" arcWidth="5.0" fill="#6b6b6b" height="14.0" layoutX="120.0" layoutY="281.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="arrow4" arcHeight="5.0" arcWidth="5.0" fill="#848484" height="14.0" layoutX="120.0" layoutY="177.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #fff3e0;">
          <children>
             <Button layoutX="463.0" layoutY="29.0" mnemonicParsing="false" onAction="#onButtonStopPressed" prefHeight="60.0" prefWidth="208.0" style="-fx-background-color: #dcc4af;" text="Stop Game" textFill="#454545">
                <font>
@@ -140,48 +154,34 @@
                   <Font size="32.0" />
                </font>
             </Button>
-            <AnchorPane fx:id="connectPanel" prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #fff3e0;">
-               <children>
-                  <Button layoutX="685.0" layoutY="28.0" mnemonicParsing="false" onAction="#onButtonConnectToServerPressed" prefHeight="68.0" prefWidth="188.0" style="-fx-background-color: #dcc4af;" text="Connect" textFill="#454545">
-                     <font>
-                        <Font size="31.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="nameField" layoutX="406.0" layoutY="28.0" prefHeight="50.0" prefWidth="253.0" promptText="Nickname">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="winnerPanel" prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #fff3e0;" visible="false">
-               <children>
-                  <Button layoutX="596.0" layoutY="27.0" mnemonicParsing="false" onAction="#onButtonPlayAgainPressed" prefHeight="68.0" prefWidth="226.0" style="-fx-background-color: #ffdca6;" text="Play Again" textFill="#454545">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="winnerText" layoutX="92.0" layoutY="37.0" prefHeight="50.0" prefWidth="442.0" text="Winner:" textFill="#534b20">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-2.0" layoutY="1.0" prefHeight="674.0" prefWidth="910.0" style="-fx-background-color: #ffdca6;">
+      <AnchorPane fx:id="winnerPanel" prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #fff3e0;" visible="false">
          <children>
-            <Circle fx:id="bigTarget" fill="#ffd300" layoutX="715.0" layoutY="326.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="smallTarget" fill="#ff5500" layoutX="838.0" layoutY="326.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-            <Arc fill="#ff8500" layoutX="111.0" layoutY="184.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Arc fill="#ff4646" layoutX="111.0" layoutY="385.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Arc fill="#0f9e05" layoutX="111.0" layoutY="487.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Arc fill="#0099a6" layoutX="111.0" layoutY="288.0" length="45.0" radiusX="60.0" radiusY="100.0" startAngle="157.5" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <Rectangle fx:id="arrow3" arcHeight="5.0" arcWidth="5.0" fill="#6b6b6b" height="14.0" layoutX="120.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-            <Rectangle fx:id="arrow2" arcHeight="5.0" arcWidth="5.0" fill="#808080" height="14.0" layoutX="120.0" layoutY="378.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-            <Rectangle fx:id="arrow1" arcHeight="5.0" arcWidth="5.0" fill="#6b6b6b" height="14.0" layoutX="120.0" layoutY="281.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-            <Rectangle fx:id="arrow4" arcHeight="5.0" arcWidth="5.0" fill="#848484" height="14.0" layoutX="120.0" layoutY="177.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Button layoutX="596.0" layoutY="27.0" mnemonicParsing="false" onAction="#onButtonPlayAgainPressed" prefHeight="68.0" prefWidth="226.0" style="-fx-background-color: #ffdca6;" text="Play Again" textFill="#454545">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Button>
+            <Label fx:id="winnerText" layoutX="92.0" layoutY="37.0" prefHeight="50.0" prefWidth="442.0" text="Winner:" textFill="#534b20">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="connectPanel" prefHeight="98.0" prefWidth="1030.0" style="-fx-background-color: #fff3e0;">
+         <children>
+            <Button layoutX="685.0" layoutY="28.0" mnemonicParsing="false" onAction="#onButtonConnectToServerPressed" prefHeight="68.0" prefWidth="188.0" style="-fx-background-color: #dcc4af;" text="Connect" textFill="#454545">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Button>
+            <TextField fx:id="nameField" layoutX="406.0" layoutY="28.0" prefHeight="50.0" prefWidth="253.0" promptText="Nickname">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
    </children>
