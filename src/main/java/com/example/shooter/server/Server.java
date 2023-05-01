@@ -8,6 +8,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+
 public class Server {
 
     public static int sleepTime = 5;
@@ -41,9 +44,11 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         new Server().startServer();
+        //Session session = HibernateUtils
     }
 
     private void startServer() throws IOException {
+
         ServerSocket serverSocket = new ServerSocket(port);
         System.out.println("Server started");
 
