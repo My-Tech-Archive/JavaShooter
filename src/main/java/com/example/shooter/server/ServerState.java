@@ -1,5 +1,7 @@
 package com.example.shooter.server;
 
+import com.example.shooter.database.Users;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,8 @@ public class ServerState {
     public List<Integer> playerScores = new ArrayList<>();
     public List<Integer> playerShots = new ArrayList<>();
     public List<Double> arrowsPositionX = new ArrayList<>();
+
+    public List<Users> leaders = new ArrayList<>();
 
     public String winner = "";
 

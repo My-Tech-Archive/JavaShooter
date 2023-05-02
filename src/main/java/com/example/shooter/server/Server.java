@@ -2,14 +2,13 @@ package com.example.shooter.server;
 
 import com.example.shooter.ClientState;
 import com.example.shooter.Tools;
+import com.example.shooter.database.Database;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
 
 public class Server {
 
@@ -44,12 +43,13 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         new Server().startServer();
-        //Session session = HibernateUtils
     }
 
     private void startServer() throws IOException {
 
         ServerSocket serverSocket = new ServerSocket(port);
+        serverState.leaders = Database.GetUsers();
+
         System.out.println("Server started");
 
         // Отдельный поток для подключений
