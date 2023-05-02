@@ -16,6 +16,8 @@ public class ServerState {
 
     public List<Users> leaders = new ArrayList<>();
 
+    public List<Integer> victories = new ArrayList<>();
+
     public String winner = "";
 
 

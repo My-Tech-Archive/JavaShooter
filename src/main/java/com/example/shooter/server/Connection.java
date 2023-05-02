@@ -1,7 +1,5 @@
 package com.example.shooter.server;
 
-import com.example.shooter.ClientState;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

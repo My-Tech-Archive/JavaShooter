@@ -30,6 +30,7 @@ public class Database {
 
     public static List<Users> GetUsers()
     {
+        System.out.println("Get users request");
         Session session = sessionFactory.openSession();
 
         var userList = session.createQuery("from Users u order by u.wins DESC", Users.class).getResultList();
@@ -38,11 +39,50 @@ public class Database {
         return userList;
     }
 
+    public static int GetWins(String username)
+    {
+        System.out.println("Get wins request for name: " + username);
+        boolean userExists = false;
+        int wins = 0;
+
+        Session session = sessionFactory.openSession();
+
+        List<Users> userList = session.createQuery("from Users", Users.class).getResultList();
+
+        for (Users user : userList)
+            if (Objects.equals(user.getName(), username))
+            {
+                wins = user.getWins();
+                userExists = true;
+            }
+
+        if (userExists)
+        {
+            session.close();
+            return wins;
+        }
+
+        // Если пользователя не существует - создаем новую запись
+        session.getTransaction().begin();
+
+        Users user = new Users();
+        user.setName(username);
+        user.setWins(0);
+        session.save(user);
+        System.out.println("New user " + username + ": " + wins);
+
+        session.getTransaction().commit();
+        session.close();
+
+        return 0;
+    }
+
 
 
 
     public static void WriteUser(String username, int wins)
     {
+        System.out.println("Write: " + username);
         Session session = sessionFactory.openSession();
 
         session.getTransaction().begin();
@@ -52,12 +92,8 @@ public class Database {
         List<Users> userList = session.createQuery("from Users", Users.class).getResultList();
 
         for (Users user : userList)
-        {
             if (Objects.equals(user.getName(), username))
-            {
                 exists = true;
-            }
-        }
 
         if (exists)
         {

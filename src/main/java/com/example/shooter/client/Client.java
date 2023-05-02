@@ -1,4 +1,4 @@
-package com.example.shooter;
+package com.example.shooter.client;
 
 import com.example.shooter.server.*;
 import javafx.application.Application;
@@ -19,11 +19,14 @@ public class Client extends Application {
     public ClientState clientState = new ClientState();
     ClientDialog dialog;
 
+    public static void main() {
+        launch();
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
         // Загрузка интерфейса
-        FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("window.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("/window.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         controller = fxmlLoader.getController();
         controller.client = this;
@@ -38,15 +41,13 @@ public class Client extends Application {
 
     public void connectToServer(String playerName) throws IOException {
         try {
-            // Получаем локальный хост
             InetAddress address = InetAddress.getLocalHost();
             // Создаем сокет
             Socket socket = new Socket(address, port);
 
-            // Создаем поток-диалог для клиента, который постоянно будет принимать и передавать ему данные
             dialog = new ClientDialog(clientState, socket);
             dialog.start();
-            // Состояние клиента постоянно передается на сервер. Запишем в него имя подключившегося игрока и то, что он еще не готов к игре
+
             clientState.playerName = playerName;
             clientState.isReady = false;
             System.out.println("Connect request");
@@ -76,12 +77,16 @@ public class Client extends Application {
             updatePlayerNames(dialog.serverState);
             updateReady(dialog.serverState);
 
+            updateWins(dialog.serverState);
+            updateLeaderPanel(dialog.serverState);
+
             if (dialog.serverState.gameIsStarted) {
                 updateTargets(dialog.serverState);
                 updateArrows(dialog.serverState);
                 updateScores(dialog.serverState);
                 updateShotCounters(dialog.serverState);
                 updateWinWindow(dialog.serverState);
+
             }
 
         });
@@ -185,6 +190,15 @@ public class Client extends Application {
         }
     }
 
+    private void updateWins(ServerState serverMessage) {
+        for (int i = 0; i < serverMessage.victories.size(); i++) {
+            if (i == 0) controller.victories1.setText("Victories: " + serverMessage.victories.get(i).toString());
+            if (i == 1) controller.victories2.setText("Victories: " + serverMessage.victories.get(i).toString());
+            if (i == 2) controller.victories3.setText("Victories: " + serverMessage.victories.get(i).toString());
+            if (i == 3) controller.victories4.setText("Victories: " + serverMessage.victories.get(i).toString());
+        }
+    }
+
     private void updateShotCounters(ServerState serverMessage) {
         for (int i = 0; i < serverMessage.playerShots.size(); i++) {
             if (i == 0) {
@@ -213,6 +227,62 @@ public class Client extends Application {
             clientState.isReady = false;
         }
     }
+
+    private void updateLeaderPanel(ServerState serverMessage) {
+        for (int i = 0; i < serverMessage.leaders.size() && i < 10; i++) {
+
+            String playerName = serverMessage.leaders.get(i).getName();
+            int wins = serverMessage.leaders.get(i).getWins();
+
+            if (i == 0) {
+                controller.top1.setVisible(true);
+                controller.top1.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+            else if (i == 1) {
+                controller.top2.setVisible(true);
+                controller.top2.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+            else if (i == 2) {
+                controller.top3.setVisible(true);
+                controller.top3.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+            else if (i == 3) {
+                controller.top4.setVisible(true);
+                controller.top4.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+            else if (i == 4) {
+                controller.top5.setVisible(true);
+                controller.top5.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+            else if (i == 5) {
+                controller.top6.setVisible(true);
+                controller.top6.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+            else if (i == 6) {
+                controller.top7.setVisible(true);
+                controller.top7.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+            else if (i == 7) {
+                controller.top8.setVisible(true);
+                controller.top8.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+            else if (i == 8) {
+                controller.top9.setVisible(true);
+                controller.top9.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+            else if (i == 9) {
+                controller.top10.setVisible(true);
+                controller.top10.setText((i+1) + ") " + playerName + ": " + wins);
+            }
+
+
+
+
+            
+        }
+        
+    }
+
 
 
 }

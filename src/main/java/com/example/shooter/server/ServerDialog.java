@@ -1,12 +1,9 @@
 package com.example.shooter.server;
 
-import com.example.shooter.ClientState;
+import com.example.shooter.client.ClientState;
 import com.google.gson.Gson;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class ServerDialog extends Thread {

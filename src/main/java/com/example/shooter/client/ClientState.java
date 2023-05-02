@@ -1,4 +1,4 @@
-package com.example.shooter;
+package com.example.shooter.client;
 
 public class ClientState {
 

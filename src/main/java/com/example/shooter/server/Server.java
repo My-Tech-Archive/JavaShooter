@@ -1,7 +1,7 @@
 package com.example.shooter.server;
 
-import com.example.shooter.ClientState;
-import com.example.shooter.Tools;
+import com.example.shooter.client.ClientState;
+import com.example.shooter.client.Tools;
 import com.example.shooter.database.Database;
 
 import java.io.IOException;
@@ -112,24 +112,38 @@ public class Server {
                 int newScore = serverState.playerScores.get(i) + 1;
                 serverState.playerScores.set(i, newScore);
 
-                if (newScore >= winScore) serverState.winner = serverState.playerNames.get(i);
+                if (newScore >= winScore) handleWinner(i);
 
                 serverState.arrowsPositionX.set(i, arrowStartPosX);
                 arrowsLaunched.set(i, false);
-                System.out.println("Big");
             }
             else if (collidedToSmall) {
                 int newScore = serverState.playerScores.get(i) + 2;
                 serverState.playerScores.set(i, newScore);
 
-                if (newScore >= winScore) serverState.winner = serverState.playerNames.get(i);
+                if (newScore >= winScore) handleWinner(i);
 
                 serverState.arrowsPositionX.set(i, arrowStartPosX);
                 arrowsLaunched.set(i, false);
-                System.out.println("Small");
             }
+
+
         }
     }
+
+
+    private void handleWinner(int index)
+    {
+        String winnerName = serverState.playerNames.get(index);
+        int newWins = serverState.victories.get(index) + 1;
+        serverState.winner = winnerName;
+        serverState.victories.set(index, newWins);
+
+        Database.WriteUser(winnerName, newWins);
+        serverState.leaders = Database.GetUsers();
+    }
+
+
     private void moveBigTarget() {
         if (bigTargetMoveUp) {
             serverState.bigTargetY -= targetSpeed;
@@ -188,12 +202,20 @@ public class Server {
             ClientState clientState = clientStates.get(i);
             if (clientState == null) continue;
 
+            // Добавление новых игроков
             if (serverState.playerNames.size() == i) {
 
+                String newPlayerName = clientState.playerName;
+
                 // Заполнение листов данными от игроков
-                if (serverState.playerNames.contains(clientState.playerName))
-                    serverState.playerNames.add(clientState.playerName + "1");
-                else serverState.playerNames.add(clientState.playerName);
+                if (serverState.playerNames.contains(newPlayerName))
+                    newPlayerName += "1";
+
+                serverState.playerNames.add(newPlayerName);
+                int victories = Database.GetWins(newPlayerName);
+
+                serverState.victories.add(victories);
+                System.out.println(victories);
 
                 serverState.playersReady.add(clientState.isReady);
                 serverState.playerScores.add(0);
@@ -202,6 +224,7 @@ public class Server {
                 arrowsLaunched.add(false);
             }
 
+            // Обновление данных уже добавленных игроков
             else  {
 
                 serverState.playersReady.set(i, clientState.isReady);

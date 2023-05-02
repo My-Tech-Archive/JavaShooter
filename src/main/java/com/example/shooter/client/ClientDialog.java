@@ -1,4 +1,4 @@
-package com.example.shooter;
+package com.example.shooter.client;
 
 import com.example.shooter.server.Server;
 import com.example.shooter.server.ServerState;

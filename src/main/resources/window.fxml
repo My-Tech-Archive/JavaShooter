@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #E0E3D2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shooter.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #E0E3D2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shooter.client.Controller">
    <children>
       <AnchorPane layoutX="908.0" prefHeight="800.0" prefWidth="292.0" style="-fx-background-color: #3786C9;" AnchorPane.rightAnchor="0.0">
          <effect>
@@ -38,14 +38,19 @@
                         <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score1" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="#68ff50" visible="false">
+                  <Label fx:id="score1" layoutX="15.0" layoutY="46.0" text="Score: 0" textFill="#68ff50" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="shotCounter1" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="#41d9ff" visible="false">
+                  <Label fx:id="shotCounter1" layoutX="16.0" layoutY="77.0" text="Shots: 0" textFill="#41d9ff" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="Impact" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="victories1" layoutX="16.0" layoutY="108.0" text="Victories: 0" textFill="#f5ff42">
+                     <font>
+                        <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
                </children>
@@ -63,14 +68,19 @@
                         <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score2" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="#68ff50" visible="false">
+                  <Label fx:id="score2" layoutX="15.0" layoutY="45.0" text="Score: 0" textFill="#68ff50" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="shotCounter2" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="#41d9ff" visible="false">
+                  <Label fx:id="shotCounter2" layoutX="16.0" layoutY="75.0" text="Shots: 0" textFill="#41d9ff" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="Impact" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="victories2" layoutX="14.0" layoutY="112.0" text="Victories: 0" textFill="#f5ff42">
+                     <font>
+                        <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
                </children>
@@ -88,14 +98,19 @@
                         <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score3" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="#68ff50" visible="false">
+                  <Label fx:id="score3" layoutX="15.0" layoutY="43.0" text="Score: 0" textFill="#68ff50" visible="false">
                      <font>
                         <Font name="Impact" size="32.0" />
                      </font>
                   </Label>
-                  <Label fx:id="shotCounter3" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="#41d9ff" visible="false">
+                  <Label fx:id="shotCounter3" layoutX="16.0" layoutY="75.0" text="Shots: 0" textFill="#41d9ff" visible="false">
                      <font>
                         <Font name="Impact" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="victories3" layoutX="14.0" layoutY="106.0" text="Victories: 0" textFill="#f5ff42">
+                     <font>
+                        <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
                </children>
@@ -113,14 +128,19 @@
                         <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score4" layoutX="15.0" layoutY="52.0" text="Score: 0" textFill="#68ff50" visible="false">
+                  <Label fx:id="score4" layoutX="15.0" layoutY="43.0" text="Score: 0" textFill="#68ff50" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="shotCounter4" layoutX="16.0" layoutY="92.0" text="Shots: 0" textFill="#41d9ff" visible="false">
+                  <Label fx:id="shotCounter4" layoutX="16.0" layoutY="77.0" text="Shots: 0" textFill="#41d9ff" visible="false">
                      <font>
-                        <Font name="Impact" size="32.0" />
+                        <Font name="Impact" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="victories4" layoutX="16.0" layoutY="108.0" text="Victories: 0" textFill="#f5ff42">
+                     <font>
+                        <Font name="Impact" size="30.0" />
                      </font>
                   </Label>
                </children>
@@ -129,17 +149,22 @@
       </AnchorPane>
       <AnchorPane layoutX="-3.0" layoutY="674.0" prefHeight="126.0" prefWidth="910.0" style="-fx-background-color: #575A6D;">
          <children>
-            <Button layoutX="640.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonStopPressed" prefHeight="60.0" prefWidth="208.0" style="-fx-background-color: #B4C640;" text="Stop Game" textFill="#454545">
+            <Button layoutX="668.0" layoutY="33.0" mnemonicParsing="false" onAction="#onLeadersPressed" prefHeight="60.0" prefWidth="186.0" style="-fx-background-color: #B4C640;" text="Leaders" textFill="#454545">
                <font>
                   <Font name="Impact" size="31.0" />
                </font>
             </Button>
-            <Button layoutX="51.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonReadyPressed" prefHeight="60.0" prefWidth="208.0" style="-fx-background-color: #B4C640;" text="Ready" textFill="#454545">
+            <Button layoutX="463.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonStopPressed" prefHeight="60.0" prefWidth="186.0" style="-fx-background-color: #B4C640;" text="Stop Game" textFill="#454545">
                <font>
                   <Font name="Impact" size="31.0" />
                </font>
             </Button>
-            <Button layoutX="351.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonShootPressed" prefHeight="60.0" prefWidth="208.0" style="-fx-background-color: #7CE700;" text="Shoot" textFill="#454545">
+            <Button layoutX="51.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonReadyPressed" prefHeight="60.0" prefWidth="186.0" style="-fx-background-color: #B4C640;" text="Ready" textFill="#454545">
+               <font>
+                  <Font name="Impact" size="31.0" />
+               </font>
+            </Button>
+            <Button layoutX="257.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonShootPressed" prefHeight="60.0" prefWidth="186.0" style="-fx-background-color: #7CE700;" text="Shoot" textFill="#454545">
                <font>
                   <Font name="Impact" size="31.0" />
                </font>
@@ -308,6 +333,65 @@
                   </LinearGradient>
                </fill>
             </Rectangle>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="topPanel" layoutX="91.0" layoutY="15.0" prefHeight="635.0" prefWidth="1038.0" style="-fx-background-color: #575A6D;" visible="false">
+         <children>
+            <Label layoutX="464.0" layoutY="14.0" prefHeight="50.0" prefWidth="139.0" text="Top 10" textFill="#fdff00">
+               <font>
+                  <Font name="Impact" size="40.0" />
+               </font>
+            </Label>
+            <Label fx:id="top1" layoutX="69.0" layoutY="64.0" prefHeight="50.0" prefWidth="579.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="top2" layoutX="69.0" layoutY="102.0" prefHeight="50.0" prefWidth="535.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="top3" layoutX="69.0" layoutY="140.0" prefHeight="50.0" prefWidth="535.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="top4" layoutX="69.0" layoutY="174.0" prefHeight="50.0" prefWidth="535.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="top5" layoutX="69.0" layoutY="209.0" prefHeight="50.0" prefWidth="535.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="top6" layoutX="69.0" layoutY="246.0" prefHeight="50.0" prefWidth="535.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="top7" layoutX="69.0" layoutY="284.0" prefHeight="50.0" prefWidth="535.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="top8" layoutX="69.0" layoutY="322.0" prefHeight="50.0" prefWidth="535.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="top9" layoutX="69.0" layoutY="356.0" prefHeight="50.0" prefWidth="535.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="top10" layoutX="69.0" layoutY="391.0" prefHeight="50.0" prefWidth="535.0" text="1) playername" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

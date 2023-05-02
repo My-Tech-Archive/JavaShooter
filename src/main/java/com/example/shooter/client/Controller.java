@@ -1,6 +1,5 @@
-package com.example.shooter;
+package com.example.shooter.client;
 
-import com.example.shooter.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -39,6 +38,51 @@ public class Controller {
     public AnchorPane playerPanel3;
     @FXML
     public AnchorPane playerPanel4;
+
+    @FXML
+    private AnchorPane topPanel;
+
+    @FXML
+    public Label top1;
+
+    @FXML
+    public Label top10;
+
+    @FXML
+    public Label top2;
+
+    @FXML
+    public Label top3;
+
+    @FXML
+    public Label top4;
+
+    @FXML
+    public Label top5;
+
+    @FXML
+    public Label top6;
+
+    @FXML
+    public Label top7;
+
+    @FXML
+    public Label top8;
+
+    @FXML
+    public Label top9;
+
+    @FXML
+    public Label victories1;
+
+    @FXML
+    public Label victories2;
+
+    @FXML
+    public Label victories3;
+
+    @FXML
+    public Label victories4;
     @FXML
     public Label score1;
     @FXML
@@ -102,7 +146,10 @@ public class Controller {
     }
 
 
-
+    @FXML
+    void onLeadersPressed(ActionEvent event) {
+        topPanel.setVisible(!topPanel.isVisible());
+    }
 
 
 }
